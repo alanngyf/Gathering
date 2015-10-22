@@ -1,0 +1,89 @@
+<%= link_to "Edit Profile", edit_user_path(session[:user_id]) %>
+<h1>Welcome, <%= @user.first_name%></h1>
+
+<h3>Here are some of events at your state:</h3>
+<table>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Date</th>
+			<th>Location</th>
+			<th>Host</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+	<% @events.each do |event|%>
+		<% if event.state == session[:state] %>
+		<tr>
+			<td><a href="/events/<%= event.id%>"><%= event.name %></a></td>
+			<td><%= event.date%></td>
+			<td><%= event.city%></td>
+			<td><%= @users.where(id: event.user_id).first.first_name %></td>
+			<td>
+				<% if event.user_id != session[:user_id]%>
+					<% if @joins.where(event_id: event.id) && event.joins.where(user_id: session[:user_id]).any? %>
+						Joining <%= button_to "Cancel", { :controller => :joins, :action => "destroy", :event_id => event.id, :user_id => session[:user_id] }, :method => "delete"%>
+					<% else %>
+						<%= button_to "Join", {:controller => :joins, :action => "update", :id => event.id}, :method => :patch %>
+					<% end%>
+				<% end%>
+			</td>
+		</tr>
+		<% end%>
+	<% end%>
+	</tbody>
+</table>
+
+<h3>Here are some of events on other states:</h3>
+<table>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Date</th>
+			<th>Location</th>
+			<th>State</th>
+			<th>Host</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+	<% @events.each do |event|%>
+		<% if event.state != session[:state] %>
+		<tr>
+			<td><a href="/events/<%= event.id%>"><%= event.name %></a></td>
+			<td><%= event.date%></td>
+			<td><%= event.city%></td>
+			<td><%= event.state%></td>
+			<td><%= @users.where(id: event.user_id).first.first_name %></td>
+			<td>
+				<% if event.user_id != session[:user_id]%>
+					<% if @joins.where(event_id: event.id) && event.joins.where(user_id: session[:user_id]).any? %>
+						Joining <%= button_to "Cancel", { :controller => :joins, :action => "destroy", :event_id => event.id, :user_id => session[:user_id] }, :method => "delete"%>
+					<% else %>
+						<%= button_to "Join", {:controller => :joins, :action => "update", :id => event.id}, :method => :patch %>
+					<% end%>
+				<% end%>
+			</td>
+		</tr>
+		<% end%>
+	<% end%>
+	</tbody>
+</table>
+
+<h2>Add Event</h2>
+<form action='/events' method='post'>
+ 	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+	<label for='name'>Name: </label>
+	<input type='text' id='name', name='name'>
+	<label for='date'>Date: </label>
+	<input type='date', id='date', name='date'>
+	<label>Location: </label>
+	<input type='text' name='city'>
+	<select name='state'>
+	<% @us_states.each do |state| %>
+		<option><%= state %></option>
+	<% end %>
+	</select>
+	<button type='submit'>Add Event</button>
+</form>

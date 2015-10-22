@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Black Belt Reviewer</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<% if flash[:errors] %>
+    <p><%= flash[:errors] %></p>
+<% end %>
+<% if current_user %>
+  <%= button_to "Log Out", session_log_out_path, method: :get %>
+<% end %>
+<%= yield %>
+
+</body>
+</html>
