@@ -11,3 +11,6 @@ Create a Rails application wherein a user can create/edit/delete and join events
 * Ability to join and event; cancel the participation to the event or edit/delete event created by the user.
 * Display of attendees per event and discussion board per event.
 * Logout feature.
+
+
+![alt text](https://github.com/alanngyf/Organization/sample2-events.png "Logo Title Text 1")
