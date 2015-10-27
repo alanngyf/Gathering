@@ -13,4 +13,4 @@ Create a Rails application wherein a user can create/edit/delete and join events
 * Logout feature.
 
 
-![alt text](https://github.com/alanngyf/Organization/sample2-events.png "Logo Title Text 1")
+![alt text](http://postimg.org/image/dr71cylu1/ "Wire Frame")
