@@ -14,3 +14,5 @@ Create a Rails application wherein a user can create/edit/delete and join events
 
 
 ![alt text](http://postimg.org/image/dr71cylu1/ "Wire Frame")
+
+![alt tag](https://raw.github.com/alanngyf/Organization/sample2-events.png)
