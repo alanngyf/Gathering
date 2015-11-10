@@ -1,4 +1,4 @@
-# Organization 
+# Gathering 
 ## An application I built during the time in Coding Dojo.
 
 Create a Rails application wherein a user can create/edit/delete and join events. The logged user can also put comments on the the discussion board per event.
